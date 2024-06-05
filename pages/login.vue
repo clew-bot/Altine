@@ -6,7 +6,7 @@
   <div class="pt-28 w-full flex flex-col md:flex-row">
     <div class="md:w-1/2 flex sm:justify-center items-center sm:ml-0">
       <div class="text-center">
-        <p class="text-5xl p-2 text-yellow-400">Welcome to Artine</p>
+        <p class="text-5xl p-2 text-yellow-400">Welcome to ASM</p>
         <p class="text-2xl p-2 text-yellow-200">Connect with others from the around the world in minutes.</p>
       </div>
     </div>
@@ -117,4 +117,8 @@ const handleLogin = async (e) => {
   }
 
 }
+definePageMeta({
+
+  middleware: ["redirect"],
+});
 </script>

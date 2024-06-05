@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const ConversationModel = new mongoose.Schema({
+import UserModel from "./User.model";
+const ConversationModelSchema = new mongoose.Schema({
     users: {
         type: Array,
         required: true,
@@ -14,8 +15,7 @@ const ConversationModel = new mongoose.Schema({
     },
     from: {
         type: mongoose.Schema.Types.ObjectId,
-        default: "",
-        ref: "User",
+        ref: UserModel,
         required: true,
     }},
     {
@@ -23,4 +23,5 @@ const ConversationModel = new mongoose.Schema({
     }
     );
 
-export default mongoose.model("Conversation", ConversationModel);
+const ConversationModel = mongoose.model("ConversationModel", ConversationModelSchema);
+export default ConversationModel

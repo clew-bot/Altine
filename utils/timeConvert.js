@@ -1,7 +1,7 @@
 export const createdAtLog = (times) => {
     let newTime = new Date(times);
-    var seconds = Math.floor((new Date() - newTime) / 1000);
-    var interval = seconds / 31536000;
+    let seconds = Math.floor((new Date() - newTime) / 1000);
+    let interval = seconds / 31536000;
     if (interval > 2) {return Math.floor(interval) + " years ago";}
     if (interval > 1) {
       return Math.floor(interval) + " year ago";
@@ -32,8 +32,8 @@ export const createdAtLog = (times) => {
 
   export const simplifiedTime = (times) => {
     let newTime = new Date(times);
-    var seconds = Math.floor((new Date() - newTime) / 1000);
-    var interval = seconds / 31536000;
+    let seconds = Math.floor((new Date() - newTime) / 1000);
+    let interval = seconds / 31536000;
     if (interval > 2) {return Math.floor(interval) + "y";}
     if (interval > 1) {
       return Math.floor(interval) + "y";

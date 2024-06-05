@@ -1,5 +1,8 @@
 <style scoped>
 @import url("@/assets/css/animations.css");
+.newFont {
+    font-family: 'Unbounded', cursive !important;
+}
 </style>
 <template>
   <v-card elevation="0">
@@ -41,11 +44,11 @@
               'text-blue-400 hover:animate-pulse': notification.type === 'friendRequestSent',
               'text-sky-500 uppercase animate-pulse animate-bounce': notification.type === 'friendRequestReceived',}"
 
-              class="text-xl font-bold  cursor-default w-fit">
+              class="newFont text-sm font-light  cursor-default w-fit">
                 {{ notification.title }}
               </div>
               <div
-                class="text-base font-semibold text-stone-100 mb-1 cursor-default overflow-hidden w-[80%] sm:w-[85%] lg:w-[88%] whitespace-nowrap text-ellipsis inline-block"
+                class="newFont text-xs font-light text-stone-100 mb-1 cursor-default overflow-hidden w-[80%] sm:w-[85%] lg:w-[88%] whitespace-nowrap text-ellipsis inline-block"
               >
                 {{ notification.content }}
    
@@ -146,6 +149,5 @@ const deleteNotification = async (fromId, notifId) => {
     notifId,
   };
   const deleteNotif = await notifStore.deleteNotif(dto);
-  console.log('deleteNotif: ', deleteNotif)
 };
 </script>

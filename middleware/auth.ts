@@ -6,7 +6,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if(!store.$state.userId && cookie) {
     await store.getUser();
     }
-    console.log("Client Middleware Ran");  
     if (!cookie.value) {
             navigateTo("/login");
         }   

@@ -1,9 +1,10 @@
+import mongoose from "mongoose";
 import UserModel from "~~/server/models/User.model";
 import NotificationModel from "~~/server/models/Notif.model";
 import MessageContentModel from "~~/server/models/MessageContent.model";
 import ConversationModel from "~~/server/models/Conversation.model";
 
-import mongoose from "mongoose";
+
 const toId = mongoose.Types.ObjectId;
 
 
@@ -11,14 +12,14 @@ export default defineEventHandler(async (event) => {
     const id:any = await useStorage().getItem("user");
     const myId = new toId(id);
     const body = await readBody(event);
+    let toUserId;
     const {message, to} = body;
-    const toUserId = new toId(to);
-
-    // const messageContentToUser = await new MessageContentModel({
-    //     content: message,
-    //     from: myId,
-    //     users: [myId, toUserId]
-    // }).save();
+    if(body.to.length <= 20) {
+        const userId = await UserModel.findOne({ handleName: body.to})
+        toUserId = new toId(userId?._id);
+    } else {
+    toUserId = new toId(to);
+    }
      const messageContentToUser = await new MessageContentModel({
         content: message,
         owner: myId,
@@ -30,7 +31,6 @@ export default defineEventHandler(async (event) => {
         users: { $all: [myId, toUserId] }
     });
 
-    console.log('conversation: ', conversation);
 
     if (conversation) {
         // set latestMessage
@@ -50,19 +50,28 @@ export default defineEventHandler(async (event) => {
         // update both users with new conversation
         await UserModel.findOneAndUpdate(
             { _id: myId },
-            { $push: { conversations: newConversation._id } }
+            { $push: { conversations: new toId(newConversation._id) } }
         );
         const updateUser = await UserModel.findOneAndUpdate(
             { _id: toUserId },
-            { $push: { conversations: newConversation._id } }
+            { $push: { conversations: new toId(newConversation._id) } }
         );
-        console.log(updateUser)
     }
+    const newNotificationForUser = await new NotificationModel({
+        title: "New message!",
+        content: "Check your messages",
+        type: "newMessageRecieved",
+        from: myId,
+    }).save();
+
+    const addNotif = await UserModel.updateOne({ _id: toUserId }, { $push: { notifications: new toId(newNotificationForUser._id) },
+    $inc: { notificationCount: 1 } });
+
 
     const options = {
         myId,
         toUserId,
     }
 
-    return "hi"
+    return null;
         });

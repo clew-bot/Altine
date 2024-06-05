@@ -28,14 +28,14 @@ const UserSchema = new mongoose.Schema({
     friends: {
         type: Array,
         default: [],
+        ref: "User",
     },
     profilePicture: {
         type: String,
         default: "https://thumbsnap.com/i/yFAPDCZg.png",
     },
     pinnedPost: {
-        type: String,
-        default: "",
+        type: mongoose.Schema.Types.ObjectId,
         ref: "UserPost",
     },
     coverPicture: {
@@ -75,12 +75,21 @@ const UserSchema = new mongoose.Schema({
     conversations: {
         type: Array,
         default: [],
-        ref: "Conversation",
+        ref: "ConversationModel",
     },
     postReacions: {
         type: Array,
         default: [],
         ref: "ReactionModel",
+    },
+    isPrivate: {
+        type: Boolean,
+        default: false,
+    },
+    bookmarks: {
+        type: Array,
+        default: [],
+        ref: "UserPost",
     },
     },
         { timestamps: true }
@@ -89,5 +98,5 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre("save", async function (next) {
     this.password = bcrypt.hashSync(this.password, 10);
 });
-
-export default mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
+export default User;

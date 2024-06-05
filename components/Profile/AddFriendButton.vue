@@ -64,7 +64,6 @@ const friRequestSent = userStore.$state.friendRequestsSent;
 const myId = userStore.$state.userId;
 const friendRequests = userStore.$state.friendRequests;
 
-console.log('fr', props)
 
 
 onMounted(async() => {

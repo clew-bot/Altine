@@ -43,17 +43,11 @@ const props = defineProps(['id']);
 const dialog = ref(false);
 
 const trashPost = async () => {
-  console.log("hi")
   const hello = await store.deletePost(props.id);
-  console.log(hello)
   // store.getRefresh();
   dialog.value = false;
   //refresh page
 };
-
-onMounted(() => {
-    console.log(props.id);
-})
 
 
 </script>

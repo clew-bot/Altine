@@ -23,9 +23,9 @@
         ></v-progress-circular>
       </div>
       <div v-else>
-        <div class="flex justify-center items-center h-screen">
-          <div class="text-white text-2xl">No notifications</div>
-        </div>
+        <div class="text-center">
+        <div class="text-2xl font-semibold text-slate-100 pt-5">No Notifications</div>
+      </div>
       </div>
   </NuxtLayout>
 </template>
@@ -40,20 +40,11 @@ const refresher = ref(0);
 const loading = ref(true);
 const friends = userStore.$state.friends;
 
-// const refresh = async (data) => {
-//   // console.log("in refresh", data.allNotifications.notifications);
-//   // allNotifs.value = data.allNotifications.notifications;
-//   // console.log("allNotifs", allNotifs.value);
-//   refresher.value++;
-// };
 
 const notificationNumber = notifStore.$subscribe((state) => {
-    console.log('ugh', state)
     if(state.events.key === 'notifications') {
         allNotifs.value = state.events.newValue
-     
     }
-    console.log('ug333h', allNotifs.value)
 })
 
 onMounted(async () => {

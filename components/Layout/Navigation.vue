@@ -14,42 +14,64 @@
                             </v-avatar> -->
                     </li>
                     <NuxtLink to="/dashboard">
-                        <li class="xl:p-4 sm:p-3 flex justify-center items-center">
+                        <li class="xl:p-5 sm:p-3 flex justify-center items-center">
                             <img :src="home" alt="" class="pl-1 icon-hover">
-                            <p class="ml-5 hidden xl:block animate-pulse">Home</p></li>
+                            <p class="ml-5 hidden xl:block hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-500 ">Home</p></li>
                     </NuxtLink>
                     <NuxtLink to="/notifications">
-                        <li class="xl:p-4 sm:p-3 flex justify-center items-center  cursor-pointer">
-                            <v-badge :content="(count || 0)" v-if="(count > 0)">
+                        <li class="xl:p-5 sm:p-3 flex justify-center items-center  cursor-pointer">
+                            <v-badge offset-x="5" color="red" :content="(count || 0)" v-if="(count > 0)">
                                 <img :src="bell" alt="" class="pl-1 icon-hover">
                             </v-badge>
-                            <img v-else :src="bell" alt="" class="pl-1 icon-hover">
-                            <p class="ml-5 hidden xl:block">Notifications</p></li>
+                            <img v-else :src="bell" alt="" class="pl-0 xl:-mt-3 icon-hover">
+                            <p class="ml-5 hidden xl:block xl:-mt-3  z-10
+                              hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">Notifications</p></li>
                     </NuxtLink>
                     <NuxtLink to="/messages">
                         <li class="xl:p-4 sm:p-3 flex justify-center items-center">
-                            <img :src="message" alt="" class="pl-1 icon-hover">
-                            <p class="ml-5 hidden xl:block">Messages</p></li>
+                            <img :src="message" alt="" class="-mt-3 pl-1 icon-hover">
+                            <p class="ml-5 hidden xl:block -mt-2
+                            hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">Messages</p></li>
                     </NuxtLink>
                     <NuxtLink to="/bookmarks">
                     <li class="xl:p-4 sm:p-3 flex justify-center items-center"> <img
                         :src="bookmark" alt="" class="pl-1 icon-hover">
-                        <p class="ml-5 hidden xl:block">Bookmarks</p></li>
+                        <p class="ml-5 hidden xl:block
+                        hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">Bookmarks</p></li>
                     </NuxtLink>
                     <NuxtLink to="/profile">
                     <li class="xl:p-4 xl:pl-5 sm:p-3 flex justify-center items-center"> <img
                         :src="profile" alt="" class="pl-1 icon-hover">
-                        <p class="ml-5 hidden xl:block xl:pl-2">My Profile</p></li>
+                        <p class="ml-5 hidden xl:block xl:pl-2
+                        hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">My Profile</p></li>
                     </NuxtLink>
+                    <NuxtLink to="/settings">
                     <li class="xl:p-4 sm:p-3 flex justify-center items-center"> <img
                         :src="more" alt="" class="pl-1 icon-hover">
-                        <p class="ml-5 hidden xl:block">More</p></li>
-    
+                        <p class="ml-5 hidden xl:block
+                        hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">More</p></li>
+    </NuxtLink>
                     <li  @click="logout" class="xl:p-4 sm:p-3 flex justify-center items-center cursor-pointer
                     transition-all"> <img
                         :src="logouts" alt="" class="pl-1 icon-hover">
-                        <p class= "transition-all
-                        ml-5 hidden xl:block">Logout</p></li>
+                        <p class= "
+                        ml-5 hidden xl:block
+                        hover:border-b-2
+                              hover:mb-[-2px]
+                             hover:border-b-purple-700 ">Logout</p></li>
+                        
                 </ul>
             </div>
         </div>
@@ -63,8 +85,8 @@
            <NuxtLink to="/notifications">
                 <IconComponent :props="{ name: 'mdi-bell', size: 'large'}"/>
             </NuxtLink>
-            <NuxtLink to="/dashboard">
-           <IconComponent :props="{ name: 'mdi-plus-box-outline', size: 'large'}"/>
+            <NuxtLink to="/bookmarks">
+           <IconComponent :props="{ name: 'mdi-bookmark', size: 'large'}"/>
            </NuxtLink>
            <NuxtLink to="/messages">
            <IconComponent :props="{ name: 'mdi-message-bulleted', size: 'large'}"/>
@@ -101,7 +123,6 @@ const store = useUserStore();
 const count = ref(store.$state?.notificationCount)
 const notificationNumber = store.$subscribe((state) => {
     if(state.events.key === 'notificationCount') {
-        console.log('hi')
         count.value = state.events.newValue
     }
 })
@@ -115,7 +136,6 @@ const notificationNumber = store.$subscribe((state) => {
 
 
 const logout = async () => {
-    console.log('logout')
     const loggingOut = await store.logout();
     navigateTo('/login')
     }

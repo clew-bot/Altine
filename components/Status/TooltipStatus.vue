@@ -35,7 +35,7 @@
       class="bg-zinc-900 h-[3rem] w-[12rem] rounded-lg shadow-lg flex justify-evenly items-center"
     >
       <v-icon 
-      :class="{ newAnim: anim1, 'start1': trigger1}"
+      :class="{ newAnim: anim1}"
       @click="(addReaction('happy'), anim1 = true)"
       color="#fde047" size="large" class="cursor-pointer"
         >mdi-emoticon-happy</v-icon
@@ -79,7 +79,6 @@ onMounted(() => {
 });
 
 const addReaction = (reaction) => {
-  console.log(reaction);
   const dto = {
     statusId: props.id,
     theReaction: reaction,

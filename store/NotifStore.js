@@ -9,9 +9,7 @@ export const useNotifStore = defineStore("notif", {
   },
   actions: {
     sendFriendRequest: async (payload) => {
-      console.log('before',userStore.$state.notificationCount)
         userStore.$state.notificationCount++;
-        console.log('after',userStore.$state.notificationCount)
         const response = await $fetch("/api/friends/send-request", {
             method: "POST",
             body: payload,
@@ -54,7 +52,6 @@ export const useNotifStore = defineStore("notif", {
           body: data,
         });
         useNotifStore().notifications.unshift(response);
-        console.log('12312312', useNotifStore().notifications)
         return response;
       },
 
@@ -66,7 +63,6 @@ export const useNotifStore = defineStore("notif", {
           body: payload,
         });
         useNotifStore().notifications.unshift(response);
-        console.log('12312312', useNotifStore().notifications)
         return response;
       }
   },

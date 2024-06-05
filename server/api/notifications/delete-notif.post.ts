@@ -1,6 +1,7 @@
+import mongoose from "mongoose";
 import UserModel from "~~/server/models/User.model";
 import NotificationModel from "~~/server/models/Notif.model";
-import mongoose from "mongoose";
+
 const toId = mongoose.Types.ObjectId;
 import jwt from "jsonwebtoken";
 
@@ -23,7 +24,6 @@ export default defineEventHandler(async (event) => {
         _id: notifId
     })
 
-    console.log('delting notif: ', deleteNotifFromMe)
 
     return true;
 });

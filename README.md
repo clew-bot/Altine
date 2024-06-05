@@ -1,33 +1,39 @@
-# Introduction
+# ASM: Another Social Media
 
-Welcome to Altine, the free social media application written in Nuxt 3. This application is built from scratch and has lots more features to be included over the next year. Altine allows users to connect with each other and make meaningful connections.
+ASM is a social media platform built using Nuxt 3, MongoDB, Typescript, Nitro, Tailwind, and Pinia. It allows users to create profiles, post text, polls, images, and videos, as well as private message and friend other users.
 
 
-# Features
+## Features
 
- 1. Create personal profile with custom handle names 
- 2. Upload pictures and videos to your profile 
- 3. Send messages to other users
- 4. Befriend other users by sending them friend requests 
- 5. Create and share posts with everyone or just your friends
-
-## Screenshots
-
-Coming Soon
+- User authentication and profile creation
+- Posting of text, polls, images, and videos
+- Private messaging and friending other users
+- Bookmarking of favorite posts
+- Interacting with posts through comments, likes and reactions
 
 ## Installation
-Make sure to install the dependencies:
 
-```bash
-# yarn
-yarn install
+To start up the app locally, follow these steps:
 
-# npm
-npm install
+1. Clone the repository.
+2. Install dependencies using ```npm install```.
+3. Start the app using ```npm run dev```.
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+Alternatively, you can start up the application with Docker by using ```docker compose up```.
+
+## ENV Variables
+```MONGO_URI``` : MongoDB connection string to access DB
+```JWT_SECRET``` : Jsonwebtoken secret 
+```VUE_APP_IMAGE_TOKEN``` : Image API key 
+```PORT``` : Port number to connect
+
+## Technologies Used
+- Nuxt 3
+- MongoDB
+- Typescript
+- Nitro
+- Tailwind
+- Pinia
 
 ## Development Server
 
@@ -51,4 +57,6 @@ Locally preview production build:
 npm run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Live
+
+https://asm-theta.vercel.app/

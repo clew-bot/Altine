@@ -12,6 +12,9 @@ export default defineNuxtConfig({
     build: {
         transpile: ['@vuepic/vue-datepicker']
     },
+    nitro: {
+        plugins: ['@/server/db/index.js']
+        },
     runtimeConfig: {
         MONGO_URI: process.env.MONGO_URI,
         JWT_SECRET: process.env.JWT_SECRET,
@@ -23,7 +26,5 @@ export default defineNuxtConfig({
             FORMAT_IDFOUR: process.env.VUE_APP_FORMAT_IDFOUR
         }
       },
-    nitro: {
-        plugins: ['@/server/db/index.js']
-        },
+    
 })

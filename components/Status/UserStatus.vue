@@ -3,24 +3,22 @@
 </style>
 <template>
   <!-- {{ pinnedPost }} -->
-    <StatusPinnedPost v-if="pinnedPost" :pinnedPost="pinnedPost"/>
+  <StatusPinnedPost v-if="pinnedPost" :pinnedPost="pinnedPost" />
   <TransitionGroup name="list">
     <div
       v-for="(status, i) in props.modelValue"
       :key="status._id"
       class="cont flex justify-center"
     >
-      <!-- {{status.author.pinnedPost}} -->
       <v-card
         elevation="0"
         color="#18181b"
         class="border-t-[.2px] rounded-none border-t-[var(--dashBorder)] bg-zinc-700 w-full"
       >
-        <!-- {{status.author}} -->
         <v-card-title>
           <div class="flex justify-items-start pt-3">
             <NuxtLink :to="`/profile/${status.author.handleName}`">
-            <StatusUserAvatar :props="status.author.profilePicture" />
+              <StatusUserAvatar :props="status.author.profilePicture" />
             </NuxtLink>
             <div class="absolute left-16 top-4 ml-2 w-fit">
               <NuxtLink :to="`/profile/${status.author.handleName}`">
@@ -34,25 +32,26 @@
                 @{{ status.author.handleName }}
               </div>
             </div>
+            <NuxtLink :to="`/post/${status._id}`">
+              <div
+                class="text-slate-300 absolute top-5 right-6 text-xs cursor-pointer"
+              >
+                {{ regularDate(status.createdAt) }}
+              </div>
 
-            <div
-              class="text-slate-300 absolute top-5 right-6 text-xs cursor-default"
-            >
-              {{ regularDate(status.createdAt) }}
-            </div>
-            <div
-              class="text-slate-500 absolute top-9 right-6 text-xs cursor-default"
-            >
-              {{ createdAtLog(status.createdAt) }}
-            </div>
+              <div
+                class="text-slate-500 absolute top-9 right-6 text-xs cursor-pointer"
+              >
+                {{ createdAtLog(status.createdAt) }}
+              </div>
+            </NuxtLink>
           </div>
         </v-card-title>
         <div class="flex flex-col gap-5">
-          <v-card-text
-            class="px-4 text-base text-white p-0 font-semibold"
-            v-html="status.content"
-          >
+          <v-card-text class="px-4 text-base text-white p-0 font-semibold">
+            {{ status.content }}
           </v-card-text>
+          <StatusPollView v-if="status.poll" :poll="status?.poll" />
 
           <div v-if="status.media">
             <StatusAllMediaPost v-model="status.media" />
@@ -75,10 +74,16 @@
               <v-icon
                 @mouseleave="closeTooltip(status._id)"
                 @mouseenter="openTooltip(status._id)"
-                :style="{color: dynamicColor[i] || checkStatusForMe(status.reactions) || '#f5f5f4'}"
-                size='default'
+                :style="{
+                  color:
+                    dynamicColor[i] ||
+                    checkStatusForMe(status.reactions) ||
+                    '#f5f5f4',
+                }"
+                size="default"
                 class="cursor-pointer"
-              >mdi-heart</v-icon>
+                >mdi-heart</v-icon
+              >
               <IconComponent
                 @click="openComments(i, status._id)"
                 class="ml-3"
@@ -90,25 +95,30 @@
               />
             </div>
             <div class="flex pt-10">
+              <!-- {{ status }} -->
               <IconComponent
-                class="mr-2"
-                :props="{ name: 'mdi-bookmark-box', 
-                color: '#f5f5f4' }"
+                @click="bookmarkPost(status._id, i)"
+                :class="
+                  bookmarks.includes(status._id) ? 'bg-green' : 'bg-orange'
+                "
+                class="rounded"
+                :props="{ name: 'mdi-bookmark-box', color: '#fff' }"
                 title="Bookmark this post"
               />
+
               <ClientOnly>
                 <StatusPostMenu
-                :id="status._id"
-                :userId="userId"
-                :statusId="status.author._id"
-              />
+                  :id="status._id"
+                  :userId="userId"
+                  :statusId="status.author._id"
+                />
               </ClientOnly>
-     
             </div>
           </div>
           <div class="flex px-4 pb-4">
             <span class="font-bold">{{ status.reactions.length }}&nbsp;</span>
-            {{status.reactions.length === 1 ? 'Reaction' : 'Reactions'}} •&nbsp; 
+            {{ status.reactions.length === 1 ? "Reaction" : "Reactions" }}
+            •&nbsp;
             <span
               @click="openComments(i, status._id)"
               class="cursor-pointer font-bold"
@@ -119,9 +129,7 @@
             >
           </div>
         </div>
-        <div v-if="i === Object.keys(props.modelValue).length - 1">
-      
-        </div>
+        <div v-if="i === Object.keys(props.modelValue).length - 1"></div>
         <div v-if="utilityObj[status._id]?.open">
           <StatusCommentInput
             @check-commented="checkCommented"
@@ -159,7 +167,26 @@ let timeout;
 const userId = ref(userStore.$state.userId);
 const dynamicColor = ref({});
 
-// console.log(props.pinnedPost)
+const bookmarks = ref(userStore.bookmarks);
+
+//Bookmarks is the actual array of bookmarked posts in the model
+//didClickBookmark is the array of booleans that will be used to change the color of the bookmark icon
+const didClickBookmark = ref(Array(props.modelValue.length).fill(false));
+
+const bookmarkPost = (id, index) => {
+  const i = bookmarks.value.indexOf(id);
+  if (i === -1) {
+    // bookmarks.value.push(id)
+  
+     store.bookmarkPost(id)
+    didClickBookmark.value[index] = true;
+  } else {
+    // store.bookmarkPost(id)
+    store.unBookmarkPost(id);
+    bookmarks.value.splice(i, 1);
+    didClickBookmark.value[index] = false;
+  }
+};
 
 const checkMatching = (id) => {
   if (utilityObj.value[id]) {
@@ -185,7 +212,7 @@ const checkStatusForMe = (reaction) => {
           return "#F5F5F4";
       }
     } else {
-      return '#F5F5F4';
+      return "#F5F5F4";
     }
   }
 };
@@ -256,24 +283,22 @@ const getVal = (arg) => {
 };
 
 const addReaction = async (reaction) => {
-  console.log(reaction);
   Object.keys(utilityObj.value).forEach((key) => {
     utilityObj.value[key].toolTip = false;
   });
 
-  if(reaction.theReaction === 'happy') {
-    dynamicColor.value[reaction.index] = '#fde047';
-  } else if(reaction.theReaction === 'wink') {
-    dynamicColor.value[reaction.index] = '#f9a8d4';
-  } else if(reaction.theReaction === 'angry') {
-    dynamicColor.value[reaction.index] = '#ef4444';
-  } else if(reaction.theReaction === 'laugh') {
-    dynamicColor.value[reaction.index] = '#0891b2';
+  if (reaction.theReaction === "happy") {
+    dynamicColor.value[reaction.index] = "#fde047";
+  } else if (reaction.theReaction === "wink") {
+    dynamicColor.value[reaction.index] = "#f9a8d4";
+  } else if (reaction.theReaction === "angry") {
+    dynamicColor.value[reaction.index] = "#ef4444";
+  } else if (reaction.theReaction === "laugh") {
+    dynamicColor.value[reaction.index] = "#0891b2";
   } else {
-    dynamicColor.value[reaction.index] = 'black';
+    dynamicColor.value[reaction.index] = "black";
   }
 
   const postReaction = await store.addReaction(reaction);
-  console.log('pr: ', postReaction);
 };
 </script>

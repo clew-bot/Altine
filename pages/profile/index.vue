@@ -6,7 +6,7 @@
     <div v-if="dto">
       <ProfileHeader :props="dto.coverPicture" />
       <ProfileComponent :props="dto" />
-      <ProfilePostsAndFriends :username="name" :pinnedPost="pinnedPost" v-model="profilePosts" />
+      <ProfilePostsAndFriends :username="name" :pinnedPost="pinnedPost" v-model="profilePosts" :friends="friends"/>
     </div>
     <div v-else class="flex justify-center items-center h-screen">
       <v-progress-circular
@@ -19,31 +19,20 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { usePostStore } from "~~/store/postStore";
 import { useUserStore } from "~~/store/userStore";
 const dto = ref(null);
 const profilePosts = ref(null);
-const postStore = usePostStore();
 const userStore = useUserStore();
-const { refresh } = storeToRefs(postStore);
-const refresher = ref(0);
 const name = ref("");
 const pinnedPost = ref(null);
-
-// watch(refresh, async (val) => {
-//   const newPosts = await userStore.getProfileInfo();
-//   dto.value = newPosts;
-//   refresher.value++;
-// });
+const friends = ref(null);
 
 onMounted(async () => {
   const data = await userStore.getProfileInfo();
- 
-  console.log("2121", data);
   name.value = data.username;
   pinnedPost.value = data.pinnedPost;
   profilePosts.value = userStore.$state.posts;
+  friends.value = data.friends;
   dto.value = data;
   // Add friends to store
 });

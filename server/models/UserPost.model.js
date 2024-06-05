@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
-import ReactionsModel from "./Reactions.model";
+// import Reactions from "./Reactions.model";
+import UserModel from "./User.model";
+
 const UserPostSchema = new mongoose.Schema({
     author: {
-        type: String,
+ type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: UserModel,
     },
     content: {
         type: String,
-        required: true,
     },
     likeCount: {
         type: Number,
@@ -36,6 +37,16 @@ const UserPostSchema = new mongoose.Schema({
         default: [],
         ref: "ReactionModel",
     },
+    poll: {
+        type: Object,
+        default: {},
+        ref: "PollModels",
+    },
+    views: {
+        type: Number,
+        default: 0,
+    },
+  
     },
     { timestamps: true }
     );
@@ -44,9 +55,9 @@ const UserPostSchema = new mongoose.Schema({
     UserPostSchema.pre('remove', function(next) {
         // 'this' is the client being removed. Provide callbacks here if you want
         // to be notified of the calls' result.
-        ReactionsModel.remove({postReactedTo: this._id}).exec();
+        ReactionModel.remove({postReactedTo: this._id}).exec();
         // ReactionsModel.remove({client_id: this._id}).exec();
         next();
     });
-
-export default mongoose.model("UserPost", UserPostSchema);
+const UserPost = mongoose.model("UserPost", UserPostSchema);
+export default UserPost

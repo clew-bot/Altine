@@ -6,13 +6,17 @@
     </div>
     <div class="pt-32 pb-4 font-bold">{{props.props.changeDescription}}</div>
     <v-text-field
+    :maxlength="props.props.maxLength"
+    oninput="if(Number(this.value) > Number(this.max)) this.value = this.max;" max="10"
       :name="props.props.name"
       density="compact"
       bg-color="#4b5563"
       variant="solo"
+      limit="10"
       :prepend-inner-icon="props.props.icon"
-      :label="props.props.placeholder"
+      :label="props.props.placeholder || props.props.rules"
       type="email"
+      :rules="props.props.rules"
       v-model="editInput"
       @input="updateInput"
     ></v-text-field>
@@ -29,7 +33,9 @@ const updateInput = () => {
   store.$state[props.props.name] = editInput.value;
 };
 
-
+watch(() => {
+  editInput.length
+})
 
 
 

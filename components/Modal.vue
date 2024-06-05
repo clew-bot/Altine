@@ -73,8 +73,8 @@
           required
           density="compact"
         ></v-text-field>
-        <label class="font-semibold text-slate-300 italic p-3 mt-0">Verify password</label>
-        <v-text-field
+        <!-- <label class="font-semibold text-slate-300 italic p-3 mt-0">Verify password</label> -->
+        <!-- <v-text-field
         autocomplete="off"
           name="securePassword"
           class="px-3 py-0 pt-0"
@@ -87,12 +87,12 @@
           @click:append="show1 = !show1"
           required
           density="compact"
-        ></v-text-field>
-        <label class="font-semibold text-slate-300 italic p-3 mt-10">Birthday</label>
+        ></v-text-field> -->
+        <!-- <label class="font-semibold text-slate-300 italic p-3 mt-10">Birthday</label>
         <div
         class="px-3 pb-5 pt-0">
         <DatePicker/>
-          </div>
+          </div> -->
    
         <label class="font-semibold text-slate-300 italic p-3 mt-10">Enter an email</label>
         <v-text-field
@@ -185,23 +185,14 @@ import { set } from "mongoose";
         loading[i] = false;
       }, 2000);
     };
-
-    const checkValues = () => {
-        console.log(emailRules.value)
-    }
     const handleCreateAccount = async (e) => {
-
-        console.log(Object.fromEntries(new FormData(e.target)))
-
         const { username, password, securePassword, email, birthday } = Object.fromEntries(new FormData(e.target))
-        console.log(username, password, securePassword, email, birthday)
         const data = {
             username,
             password,
             email,
             birthday
         }
-        console.log(data)
         const clientSignUpToken = await store.signUp(data)
         console.log(clientSignUpToken.error)
         if (clientSignUpToken.error) {

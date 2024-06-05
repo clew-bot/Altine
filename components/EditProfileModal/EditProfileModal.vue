@@ -1,13 +1,13 @@
 <style scoped>
-.editProfile >>> .v-overlay__content {
+.editProfile:deep() .v-overlay__content {
   max-width: 550px !important;
 }
 
-.editProfile >>> .v-card-text {
+.editProfile:deep() .v-card-text {
   padding: 0rem 1rem 1rem 1rem !important;
 }
 
-.editProfile >>> .v-card {
+.editProfile:deep() .v-card {
     width:50rem !important;
     min-height: max-content !important;
 }
@@ -74,7 +74,6 @@
         <div class="border"></div>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="checkMe"></v-btn>
           <v-btn
           :disabled="disabled"
           color="blue" variant="text" @click="dialog = false">
@@ -114,11 +113,9 @@ const refresh = async () => {
 };
 const saveEditInputs = async () => {
   disabled.value = true;
-  console.log('saveEditInputs');
   await store.editDetails();
   setTimeout(() => {
     dialog.value = false;
-    console.log('sh', store.$state.handle)
     if(store.handle === "") {
       router.go();
     } else if (store.handle !== "") {
@@ -131,9 +128,5 @@ const saveEditInputs = async () => {
 const openTab = (tab) => {
   theTab.value = tab;
 
-};
-
-const checkMe = () => {
-  console.log(theTab.value);
 };
 </script>

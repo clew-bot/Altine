@@ -1,5 +1,5 @@
-import UserModel from "~~/server/models/User.model";
 import mongoose from "mongoose";
+import UserModel from "~~/server/models/User.model";
 const toId = mongoose.Types.ObjectId;
 
 export default defineEventHandler(async (event) => {

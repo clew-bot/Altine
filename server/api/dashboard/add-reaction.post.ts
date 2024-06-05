@@ -1,13 +1,12 @@
+import mongoose from "mongoose";
 import UserPost from "~~/server/models/UserPost.model";
 import UserModel from "~~/server/models/User.model";
 import ReactionModel from "~~/server/models/Reactions.model";
 
-import mongoose from "mongoose";
 const toId = mongoose.Types.ObjectId;
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
-    console.log('body: ', body)
     const theReaction = body.theReaction;
     const postIden = body.statusId;
     const postId = new toId(postIden);
@@ -22,7 +21,6 @@ export default defineEventHandler(async (event) => {
 
     if (checkReaction) {
         console.log('reaction already exists, deleting reaction')
-        // if user has already reacted to post, delete the reaction
         const deleteReaction = await ReactionModel.findOneAndDelete({
             _id: checkReaction._id
         })

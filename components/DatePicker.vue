@@ -1,5 +1,5 @@
 <style scoped>
-.picker >>> .dp__pointer{
+.picker:deep() .dp__pointer{
     background-color: #2F2F32!important;
     color: white;
     border: 0px solid #2F2F32!important;
@@ -36,7 +36,6 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const date = ref();
 const emit = defineEmits(["birthdayDate"])
 watch(date, () => {
-    console.log('watched', format(date.value));
     emit('birthdayDate', format(date.value))
 })  
 const maxDate = ref(new Date(2022, (new Date()).getMonth(), (new Date()).getDate()));

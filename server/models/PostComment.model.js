@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
-const PostComment = new mongoose.Schema({
+import UserModel from "./User.model";
+import UserPost from "./UserPost.model";
+const PostCommentSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: UserModel,
         required: true
     },
     postRef: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "UserPost",
+        ref: UserPost,
     },
     content: {
         type: String,
@@ -21,7 +23,7 @@ const PostComment = new mongoose.Schema({
     replies: {
         type: Array,
         default: [],
-        ref: "PostComment",
+
     },
     photos: {
         type: Array,
@@ -31,4 +33,5 @@ const PostComment = new mongoose.Schema({
     { timestamps: true }
     );
 
-export default mongoose.model("PostComment", PostComment);
+const PostComment = mongoose.model("PostComment", PostCommentSchema);
+export default PostComment

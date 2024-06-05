@@ -97,8 +97,5 @@ const rows = ref([
   { class: "rounded-2xl" },
   { class: "m-10" },
 ]);
-const checkValue = () => {
-  console.log(select.value.class);
-};
 
 </script>

@@ -1,6 +1,7 @@
+import mongoose from "mongoose";
 import UserModel from "~~/server/models/User.model";
 import NotificationModel from "~~/server/models/Notif.model";
-import mongoose from "mongoose";
+
 const toId = mongoose.Types.ObjectId;
 
 export default defineEventHandler(async (event) => {
@@ -42,6 +43,12 @@ export default defineEventHandler(async (event) => {
         from: userId,
     }).save();
 
+    const newNotif = await NotificationModel.findOne({
+        'from': userId,
+        'type': 'friendRequestAccepted',
+    }).select("title content type from") .populate('from')
+
+
     // add notification to me
     const addNotifMe = await UserModel.updateOne({ _id: myId }, { $push: { notifications: newNotificationForMe._id } });
 
@@ -54,7 +61,7 @@ export default defineEventHandler(async (event) => {
     }).save();
 
     // add notification to user
-    const addNotif = await UserModel.updateOne({ _id: userId }, { $push: { notifications: newNotificationForUser._id } });
+    const addNotif = await UserModel.updateOne({ _id: userId }, { $push: { notifications: new toId(newNotificationForUser._id) } });
 
     const updateMyNotif = await NotificationModel.deleteOne({
         'from': userId,
@@ -65,9 +72,14 @@ export default defineEventHandler(async (event) => {
     const allNotifications = await UserModel.findOne({ _id: myId })
     .populate({ 
         path: "notifications", 
+        model: NotificationModel,
         populate: {
-            path: "from"
+            path: "from",
+            model: UserModel
         },
         options: { sort: { createdAt: -1 },} })
-    return newNotificationForMe
+
+
+
+    return newNotif
 });

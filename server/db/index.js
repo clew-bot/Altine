@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Nitro } from "nitropack";
 
 // Nitro plugin
 // Thanks to https://github.com/UnderKoen for the answer to this

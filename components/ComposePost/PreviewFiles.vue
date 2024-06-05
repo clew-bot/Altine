@@ -1,7 +1,8 @@
 <template>
   <div>
     <div v-if="props.source" class="relative flex gap-1 justify-start overflow-auto pb-1 bg-neutral-700">
-        <v-icon @click="deletePicture(i)" color="black" class="absolute right-0"
+
+      <v-icon v-for="pic in props.source" :key="pic" @click="deletePicture(i)" color="black" class="absolute border-2 z-10 top-0 bg-red"
           >mdi-close</v-icon
         >
         <img 

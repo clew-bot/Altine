@@ -2,65 +2,65 @@
 * {
     font-family: 'Quicksand', sans-serif !important;
   }
-  .log >>> .v-input__details {
+  .log:deep() .v-input__details {
     display: none;
   }
   
-  .button >>> .v-btn {
+  .button:deep() .v-btn {
     width: 100% !important;
     background: var(--loginSignUpButton) !important;
     border-radius: 5px;
     text-transform: none !important;
     transition: all 0.3s ease-in-out !important;
   }
-  .log >>> .v-field--variant-filled .v-field__outline::before,
+  .log:deep() .v-field--variant-filled .v-field__outline::before,
   .v-field--variant-underlined .v-field__outline::before {
     display: none;
   }
   
-  .log >>> .v-field__outline::after {
+  .log:deep() .v-field__outline::after {
     border: none !important;
   }
-  .log >>> .v-field {
+  .log:deep() .v-field {
     border-radius: 0px !important;
   }
-  .log >>> .v-field--variant-filled {  
+  .log:deep() .v-field--variant-filled {  
     border-radius: 15px !important;
     box-shadow: none !important;
     width: 75% !important;
     background: rgb(11, 12, 5);
   }
   
-  .log >>> .v-input__control {
+  .log:deep() .v-input__control {
     width: 100% !important;
   }
   
 
 
 
-  /* .signup >>> .v-input__details {
+  /* .signup:deep() .v-input__details {
     display: none;
   } */
   
-  .signup-btn >>> .v-btn {
+  .signup-btn:deep() .v-btn {
     width: 100% !important;
     background: var(--loginSignUpButton) !important;
     border-radius: 5px;
     text-transform: none !important;
     transition: all 0.3s ease-in-out !important;
   }
-.signup >>> .v-field--variant-filled .v-field__outline::before,
+.signup:deep() .v-field--variant-filled .v-field__outline::before,
   .v-field--variant-underlined .v-field__outline::before {
     display: none;
   }
   
-  .signup >>> .v-field__outline::after {
+  .signup:deep() .v-field__outline::after {
     border: none !important;
   }
-  .signup >>> .v-field {
+  .signup:deep() .v-field {
     border-radius: 0px !important;
   }
-  .signup >>> .v-field--variant-filled {
+  .signup:deep() .v-field--variant-filled {
     border: solid 1px linear-gradient(90deg, rgba(211, 233, 10, 0.767) 0%, rgba(39, 189, 94, 0.767) 100%) !important;
     border-radius: 10px !important;
     box-shadow: none !important;
@@ -70,7 +70,7 @@
     border-right: solid 3px var(--signUpInputBorder) !important;
   }
   
-  .signup >>> .v-input__control {
+  .signup:deep() .v-input__control {
     width: 100% !important;
     color: white !important;
   }
@@ -83,38 +83,38 @@
 /* v-text-field:hover,  */
 /* .v-field__field:hover */
 
-.text-container >>> .v-field__outline {
+.text-container:deep() .v-field__outline {
   display: none !important;
 }
 
-.text-container >>> .v-field--variant-filled, .v-field__overlay  {
+.text-container:deep() .v-field--variant-filled, .v-field__overlay  {
   background-color: inherit !important;
   border-bottom: solid .2px var(--dashBorder);
   border-radius: 0px !important;
 }
 
-.no-b >>> .v-field--variant-filled, .v-field__overlay  {
+.no-b:deep() .v-field--variant-filled, .v-field__overlay  {
   background-color: inherit !important;
   border-bottom: none;
   border-radius: 0px !important;
 }
 
-.text-container >>> .v-field__overlay {
+.text-container:deep() .v-field__overlay {
   background-color: inherit !important;
   border-radius: 0px !important;
 }
 
-.text-container >>> .v-field__overlay {
+.text-container:deep() .v-field__overlay {
   /* border: solid 2px red !important; */
   background: #5d615d !important;
   border-radius: 0px !important;
 }
 
-.text-container >>> .v-label {
+.text-container:deep() .v-label {
   text-transform: none !important;
   border-radius: 0px !important;
 }
 
-.text-container >>> .v-container {
+.text-container:deep() .v-container {
   padding: 0px !important;
 }

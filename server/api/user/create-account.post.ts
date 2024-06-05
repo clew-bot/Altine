@@ -1,5 +1,6 @@
-import UserModel from "~~/server/models/User.model";
 import mongoose from "mongoose";
+import UserModel from "~~/server/models/User.model";
+
 const toId = mongoose.Types.ObjectId;
 import jwt from 'jsonwebtoken';
 const config = useRuntimeConfig();
@@ -31,10 +32,9 @@ export default defineEventHandler(async (event) => {
         });
         setCookie(event, "altine", token);
         useStorage().setItem("user", newUser._id);
-        console.log(body.username, "has been created 🔥");
+
         return token
     } else {
-        console.log("User already exist");
         return { error: true, message: `User Already Exists`, };
     }
 })

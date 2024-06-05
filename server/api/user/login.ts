@@ -1,5 +1,6 @@
-import UserModel from "~~/server/models/User.model";
 import mongoose from "mongoose";
+import UserModel from "~~/server/models/User.model";
+
 import bcrypt from "bcrypt";
 const toId = mongoose.Types.ObjectId;
 import jwt from 'jsonwebtoken';
@@ -22,10 +23,9 @@ export default defineEventHandler(async (event) => {
                 expiresIn: 43200, // 24 hours
             });
             setCookie(event, "altine", token);
-            console.log('111111', userExist)
             useStorage().setItem("user", userExist._id);
             useStorage().setItem("profilePic", userExist.profilePicture);
-            console.log('22', await useStorage().getItem("profilePic"))
+
 
             return { error: false, message: "Nice", name: userExist.handleName, email: userExist.email };
             } else {

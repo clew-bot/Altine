@@ -1,5 +1,5 @@
 <style scoped>
-.badger >>> .v-img__img--contain {
+.badger:deep() .v-img__img--contain {
   object-fit: cover !important;
 }
 </style>

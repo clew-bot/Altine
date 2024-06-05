@@ -59,7 +59,7 @@ export default defineComponent({
 
     }
 
-    .video-js >>> .vjs-tech {
+    .video-js:deep() .vjs-tech {
         position: absolute !important;
         width: 100% !important;
    
@@ -73,10 +73,10 @@ export default defineComponent({
     border-bottom: .2px solid var(--dashBorder) !important; */
 }
 
-.video-js >>> .vjs-tech {
+.video-js:deep() .vjs-tech {
     position: relative !important;
 }
-.video-player >>> .vjs-big-play-button {
+.video-player:deep() .vjs-big-play-button {
   width: 80px;
   position: absolute;
   top: 50%;
@@ -85,38 +85,38 @@ export default defineComponent({
   transform: translate(-50%, -50%);
 }
 
-.video-player >>> button[title="Play"] > .vjs-icon-placeholder::before {
+.video-player:deep() button[title="Play"] > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/switchOn.png) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
 
-.video-player >>> button[title="Pause"] > .vjs-icon-placeholder::before {
+.video-player:deep() button[title="Pause"] > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/switchOff.png) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
-.video-player >>> button[title="Unmute"] > .vjs-icon-placeholder::before {
+.video-player:deep() button[title="Unmute"] > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/muted.png) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
 
-.video-player >>> button[title="Mute"] > .vjs-icon-placeholder::before {
+.video-player:deep() button[title="Mute"] > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/unmuted.png) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
 
 .video-player
-  >>> button[title="Picture-in-Picture"]
+ :deep() button[title="Picture-in-Picture"]
   > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/pip.svg) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
 .video-player
-  >>> button[title="Exit Picture-in-Picture"]
+ :deep() button[title="Exit Picture-in-Picture"]
   > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/pip.svg) !important;
   margin-left: 5px;
@@ -124,29 +124,29 @@ export default defineComponent({
 }
 
 .video-player
-  >>> button[title="Picture-in-Picture"]
+ :deep() button[title="Picture-in-Picture"]
   > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/pip.svg) !important;
   margin-left: 5px;
   margin-top: 3px;
 }
 
-.video-player >>> button[title="Fullscreen"] > .vjs-icon-placeholder::before {
+.video-player:deep() button[title="Fullscreen"] > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/fullscreen.png) !important;
   margin-top: 3px;
 }
 
 .video-player
-  >>> button[title="Exit Fullscreen"]
+ :deep() button[title="Exit Fullscreen"]
   > .vjs-icon-placeholder::before {
   content: url(@/assets/svg/fullscreen.png) !important;
   margin-top: 3px;
 }
 
-.video-player >>> .vjs-control-bar {
+.video-player:deep() .vjs-control-bar {
   background-color: #06b6d4 !important;
 }
-.video-player >>> button[title="Play"] {
+.video-player:deep() button[title="Play"] {
   display: flex;
   justify-content: center;
   align-items: center;

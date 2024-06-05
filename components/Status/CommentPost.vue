@@ -31,9 +31,6 @@
               >
             </div>
             <div class="flex text-sm gap-2 font-semibold">
-              <div class="text-yellow-400 hover:underline cursor-pointer italic">
-                reply
-              </div>
               <!-- <div class="text-red-300 hover:underline cursor-pointer">Report</div> -->
               <div class="text-sm text-gray-400 cursor-default">
                 {{ createdAtLog(comment.createdAt) }}
@@ -116,9 +113,4 @@ const loadMoreComments = (val) => {
     loadMore.value = false;
 };
 
-// const checkValue = computed((val) => {
-//     console.log('modelValue', modelValue)
-//     console.log('val', val)
-//     return modelValue
-// })
 </script>

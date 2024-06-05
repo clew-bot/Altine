@@ -1,6 +1,7 @@
+import mongoose from "mongoose";
 import UserModel from "~~/server/models/User.model";
 import NotificationModel from "~~/server/models/Notif.model";
-import mongoose from "mongoose";
+
 const toId = mongoose.Types.ObjectId;
 import jwt from "jsonwebtoken";
 
@@ -34,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
     const newNotificationForUser = await new NotificationModel({
         title: "New Request!",
-        content: "You have a new friend request from",
+        content: "You have a new friend request from ",
         type: "friendRequestReceived",
         from: id, // me
         to: userId, // user

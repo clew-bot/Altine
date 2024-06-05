@@ -9,17 +9,24 @@ export const useMessageStore = defineStore("message", {
   },
   actions: {
     sendMessage: async (payload) => {
-        const response = await $fetch("/api/messages/send-message", {
-            method: "POST",
-            body: payload,
-        });
-        return response;
-        },
+      const response = await $fetch("/api/messages/send-message", {
+        method: "POST",
+        body: payload,
+      });
+      return response;
+    },
     getMyMessages: async () => {
-        const response = await $fetch("/api/messages/my-messages", {
-            method: "GET",
-        });
-        return response;
-        }
+      const response = await $fetch("/api/messages/my-messages", {
+        method: "GET",
+      });
+      return response;
+    },
+    getPrivateMessages: async (payload) => {
+      const response = await $fetch("/api/messages/private-messages", {
+        method: "POST",
+        body: payload,
+      });
+      return response;
+    },
   },
 });

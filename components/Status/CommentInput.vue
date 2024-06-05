@@ -1,10 +1,10 @@
 <style scoped>
-.comment-container >>> .v-field__outline {
+.comment-container:deep() .v-field__outline {
   display: none !important;
   
 }
 
-.comment-container >>> .v-field--variant-filled, .v-field__overlay  {
+.comment-container:deep() .v-field--variant-filled, .v-field__overlay  {
   background-color: inherit !important;
   border-bottom: solid .2px var(--dashBorder);
   border-radius: 0px !important;
@@ -12,7 +12,7 @@
   
 }
 
-.comment-container >>> .v-field--variant-filled, .v-field__overlay  {
+.comment-container:deep() .v-field--variant-filled, .v-field__overlay  {
   background-color: inherit !important;
   border-bottom: none;
   border-radius: 0px !important;
@@ -20,26 +20,26 @@
 
 }
 
-.comment-container >>> .v-field__overlay {
+.comment-container:deep() .v-field__overlay {
   background-color: inherit !important;
   border-radius: 0px !important;
  
 }
 
-.comment-container >>> .v-field__overlay {
+.comment-container:deep() .v-field__overlay {
   /* border: solid 2px red !important; */
   background: #2b312b !important;
   border-radius: 0px !important;
  
 }
 
-.comment-container >>> .v-label {
+.comment-container:deep() .v-label {
   text-transform: none !important;
   border-radius: 0px !important;
 
 }
 
-.comment-container >>> .v-container {
+.comment-container:deep() .v-container {
   padding: 0px !important;
 
   /* width: 80% !important; */
@@ -91,8 +91,6 @@ const theText = ref('');
 
 const profilePic = ref(userStore.$state.profilePicture)
 
-console.log(profilePic.value)
-console.log(userStore.$state.profilePicture)
 
 const sendComment = async () => {
   theText.value = theText.value.trim();

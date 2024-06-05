@@ -1,23 +1,25 @@
 import mongoose from "mongoose";
-const ReactionModel = new mongoose.Schema({
+import UserPost from "./UserPost.model";
+import UserModel from "./User.model";
+
+const ReactionSchema = new mongoose.Schema({
     reactionType: {
         type: String,
         required: true,
     },
     from: {
-        type: String,
-        default: "",
-        ref: "User",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: UserModel,
         required: true,
     },
     postReactedTo: {
-        type: String,
-        default: "",
-        ref: "UserPost",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: UserPost,
         required: true,
     },
     },
     { timestamps: true }
     );
 
-export default mongoose.model("ReactionModel", ReactionModel);
+const Reactions = mongoose.model("ReactionModel", ReactionSchema);
+export default Reactions;

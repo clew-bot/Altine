@@ -1,5 +1,6 @@
-import UserPost from "~~/server/models/UserPost.model";
 import mongoose from "mongoose";
+import UserPost from "~~/server/models/UserPost.model";
+
 const toId = mongoose.Types.ObjectId;
 import jwt from 'jsonwebtoken';
 

@@ -64,15 +64,17 @@ const editValues = ref([
         "This is the name displayed on your posts, comments, and profile.",
       changeDescription: "Update your name here.",
       placeholder: "Mark Twain",
+      maxLength: 15,
     },
     handle: {
       value: "Handle",
       icon: "mdi-at",
       name: "handle",
       show: false,
-      description: "This is the handle people use to tag or reach you at",
-      changeDescription: "Update your handle here.",
+      description: "This is the handle people use to tag or reach you at.",
+      changeDescription: "Update your handle here.Limited to 15 characters.",
       placeholder: "MarkTwain69",
+      maxLength: 12,
     },
     location: {
       value: "Location",
@@ -82,6 +84,7 @@ const editValues = ref([
       description: "This is the location people can see you at on your profile",
       changeDescription: "Update your Location here.",
       placeholder: "San Fransisco, CA",
+      maxLength: 30,
     },
     birthday: {
       value: "Birthday",
@@ -91,6 +94,7 @@ const editValues = ref([
       description: "This is the birthday people can see you at on your profile",
       changeDescription: "Change your Birthday here.",
       placeholder: "August 8, 1995",
+      maxLength: 20,
     },
     bio: {
       value: "Bio",
@@ -100,6 +104,7 @@ const editValues = ref([
       description:
         "This is the bio people can see you at on your profile. It can be anything you want.",
       changeDescription: "Update your bio here.",
+      maxLength: 100,
     },
   },
 ]);

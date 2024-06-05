@@ -27,14 +27,11 @@ onMounted(() => {
             const posts = await store.getPosts();
           if (posts.length === 0) {
             loading.value = false;
-            console.log("yeah i'm done here");
             store.$state.postsFull = true;
             observer.unobserve(observedElement);
           }
           }, 500);
-        } else {
-          console.log("not intersecting");
-        }
+        } 
       });
     });
     observer.observe(observedElement);

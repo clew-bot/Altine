@@ -40,8 +40,6 @@ const handleProfilePicture = (e) => {
     profilePicture.value.push(URL.createObjectURL(file));
     store.$state.profilePicturePreview.file.push(file);
     store.$state.profilePicturePreview['preview'] = profilePicture.value;
-//   allFiles.value.push(file);
-    console.log('handling: ', store.$state.profilePicturePreview);
 };
 
 const deletePicture = (index) => {
@@ -49,7 +47,6 @@ const deletePicture = (index) => {
         file: [],
         preview: [],
     };
-    console.log('deleting: ', store.$state.profilePicturePreview);
 
 }
 

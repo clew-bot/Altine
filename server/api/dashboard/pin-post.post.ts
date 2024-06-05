@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
         pinnedPost: body
     }, {new: true});
 
-    console.log('user', user)
 
     return "hi"
 })

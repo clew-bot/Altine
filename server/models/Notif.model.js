@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-const NotificationModel = new mongoose.Schema({
+import UserModel from "./User.model";
+const NotificationModelSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -13,15 +14,13 @@ const NotificationModel = new mongoose.Schema({
         default: false,
     },
     from: {
-        type: String,
-        default: "",
-        ref: "User",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: UserModel,
         required: true,
     },
     to: {
-        type: String,
-        default: "",
-        ref: "User",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: UserModel,
     },
     type: {
         type: String,
@@ -32,5 +31,5 @@ const NotificationModel = new mongoose.Schema({
     { timestamps: true }
     );
 
-
-export default mongoose.model("NotificationModel", NotificationModel);
+const NotificationModel = mongoose.model("NotificationModels", NotificationModelSchema);
+export default NotificationModel

@@ -26,10 +26,6 @@ const pinPost = async () => {
   //refresh page
 };
 
-onMounted(() => {
-    console.log(props.id);
-})
-
 
 </script>
 
